@@ -24,19 +24,23 @@ def show_shan_chen_density_curves():
             'weight': 'normal',
             'size': 16,
             }
-    density = np.arange(1, 1000, 0.01)
+    density = np.arange(1, 2000, 1)
     pressure = np.vectorize(equations.shan_chen_pressure)
-    for G in range(-144, -47, 12):
+    Gs = np.arange (-1000, 0, 100)
+    for G in Gs:
         # plt.text(1000, 200 - 0.65*abs(G), f'G={G}', font)
-        plt.plot(density, pressure(G, density), label=f'G={G}')
+        plt.plot(density, pressure(G,equations.psi_vdW, density), label=f'G={G}')
     plt.xlabel('Density, [mass unit]/[lattice unit]^2')
     plt.ylabel('p, [mass unit]/[time step]^2')
+    plt.grid()
     plt.legend()
     plt.show()
 
+def show_psi():
+    pass
 
 def main():
-    show_co2_isotherms()
+    #show_co2_isotherms()
     show_shan_chen_density_curves()
 
 
